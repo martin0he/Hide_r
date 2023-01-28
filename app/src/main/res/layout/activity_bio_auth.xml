@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".bioAUth"
+    android:background="@color/A1back">
+
+    <ImageView
+        android:id="@+id/lockIcon"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/lock"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+
+        />
+
+    <TextView
+        android:id="@+id/authText"
+        android:text="Authentication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bestfont"
+        android:textColor="@color/A1text"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="183dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
+
+
+    <Button
+        android:id="@+id/authButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="fingerprint"
+        android:fontFamily="@font/bestfont"
+        android:textColor="#04CCFB"
+        android:background="@drawable/oval_shape_grad"
+        android:layout_below="@id/authText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:drawableStart="@drawable/ic_fingerprint_24"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        style="@style/Widget.AppCompat.Button.Colored"
+        />
+
+    <Button
+        android:id="@+id/returnMAIN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_return_main"
+        android:text="back"
+        android:fontFamily="@font/bestfont"
+        android:textColor="@color/A1text"
+        android:padding="10dp"
+        android:background="@drawable/oval_shape_grad"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="20dp"
+        style="@style/Widget.AppCompat.Button.Colored"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@color/A1back"
+    android:orientation="vertical"
+    tools:context=".Gallery">
+
+
+    <Button
+        android:id="@+id/goBackToCam"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/galtext"
+        android:layout_marginLeft="300dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/oval_shape_grad"
+        android:drawableStart="@drawable/ic_return_main"
+        android:fontFamily="@font/bestfont"
+        android:padding="10dp"
+        android:text="back"
+        android:textColor="@color/A1text" />
+
+    <TextView
+        android:id="@+id/galtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_above="@id/idRVImages"
+
+        android:layout_marginBottom="100dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/A1back"
+        android:fontFamily="@font/bestfont"
+        android:text="Gallery"
+        android:textColor="@color/A1text"
+
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+
+    <Spinner
+
+        android:id="@+id/sortBtn"
+        android:layout_width="65dp"
+        android:layout_height="48dp"
+        android:layout_above="@id/idRVImages"
+        android:layout_marginLeft="327dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="24dp"
+
+        android:fontFamily="@font/bestfont"
+        android:text="sort"
+        android:textColor="@color/A1text"
+        android:textSize="15dp"
+        android:textStyle="bold"
+
+
+        />
+    <!--recycler view for displaying the list of images-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/idRVImages"
+        android:layout_width="match_parent"
+        android:layout_height="480dp" />
+
+</RelativeLayout>

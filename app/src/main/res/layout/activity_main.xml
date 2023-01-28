@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.hide_r.MainActivity"
+    android:theme="@style/AppTheme.NoActionBar">
+
+    <TextureView
+        android:id="@+id/texture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+         />
+
+    <ImageButton
+        android:id="@+id/custom_button"
+        android:layout_width="108dp"
+        android:layout_height="105dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_normal"
+        android:text="Take picture"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/flip"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="87dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="30dp"
+        android:layout_toRightOf="@id/custom_button"
+        android:background="@drawable/cameraflip"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/gallery"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="87dp"
+        android:layout_marginBottom="30dp"
+        android:layout_toLeftOf="@id/custom_button"
+        android:background="@drawable/gallery"
+        tools:ignore="SpeakableTextPresentCheck"
+        />
+
+</RelativeLayout>
