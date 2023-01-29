@@ -58,19 +58,47 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemSele
 
 
         Spinner sort = findViewById(R.id.sortBtn);
-        sort.setOnItemSelectedListener(this);
+
 
         ArrayAdapter ad = new ArrayAdapter(this, android.R.layout.simple_spinner_item, sorters);
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sort.setOnItemSelectedListener(this);
         sort.setAdapter(ad);
 
 
         prepareRecyclerView();          // calling a method to prepare our recycler view.
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String selectedOption = (String) adapterView.getItemAtPosition(i);
+        sortAction(selectedOption);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
     private void switchActivities() {
         Intent switchActivityIntent = new Intent(this, MainActivity.class);
         startActivity(switchActivityIntent);
+    }
+
+    private void sortAction(String selectedOption) {
+        switch (selectedOption) {
+            case "Ascending":
+                // start action for option 1
+                Collections.sort(imagePaths);
+                break;
+            case "Descending":
+                // start action for option 2
+                Collections.reverse(imagePaths);
+                break;
+            default:
+                // do nothing
+                break;
+        }
     }
 
 
@@ -140,18 +168,5 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemSele
         }
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        if (adapterView.getItemAtPosition(i).equals(sorters[0])){
-            Collections.sort(imagePaths);
-        }
-        if (adapterView.getItemAtPosition(i).equals(sorters[1])){
-            Collections.reverse(imagePaths);
-        }
-    }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
 }
