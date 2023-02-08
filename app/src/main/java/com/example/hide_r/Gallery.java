@@ -90,10 +90,12 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemSele
             case "Ascending":
                 // start action for option 1
                 Collections.sort(imagePaths);
+                imageRVAdapter.notifyDataSetChanged();
                 break;
             case "Descending":
                 // start action for option 2
                 Collections.reverse(imagePaths);
+                imageRVAdapter.notifyDataSetChanged();
                 break;
             default:
                 // do nothing
