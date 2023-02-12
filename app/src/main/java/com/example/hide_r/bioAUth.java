@@ -20,7 +20,7 @@ public class bioAUth extends AppCompatActivity {
     private Executor executor;
     private BiometricPrompt biometricPrompt;
     private BiometricPrompt.PromptInfo promptInfo;
-    MainActivity obj = new MainActivity();
+    MainActivity main = new MainActivity();
 
 
     @Override
@@ -65,11 +65,12 @@ public class bioAUth extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),
                         "Authentication succeeded", Toast.LENGTH_SHORT).show();
-                try {
-                    TESTFileEncryptionDecryption.decryptFile(obj.EmHiderPicsFolder, obj.DmHiderPicsFolder, obj.password);
+                /*try {
+                    FileEncryptionDecryption.decryptFile(main.EmHiderPicsFolder, main.DmHiderPicsFolder, main.password);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                 */
                 switchActivities();
 
             }

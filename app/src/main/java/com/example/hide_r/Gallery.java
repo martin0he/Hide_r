@@ -11,6 +11,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -33,7 +34,7 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemSele
     private RecyclerView imagesRV;
     private RecyclerViewAdapter imageRVAdapter;
     private Button returnButton;
-    String[] sorters = {"Ascending", "Descending"};
+    String[] sorters = {"Ascending (Old)", "Descending (New)"};
 
 
     @Override
@@ -59,16 +60,15 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemSele
 
 
         Spinner sort = findViewById(R.id.sortBtn);
-
-
         ArrayAdapter ad = new ArrayAdapter(this, android.R.layout.simple_spinner_item, sorters);
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sort.setOnItemSelectedListener(this);
         sort.setAdapter(ad);
+        sort.setOnItemSelectedListener(this);
 
 
         prepareRecyclerView();          // calling a method to prepare our recycler view.
     }
+
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -88,15 +88,16 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemSele
 
     private void sortAction(String selectedOption) {
         switch (selectedOption) {
-            case "Ascending":
+            case "Ascending (Old)":
                 // start action for option 1
                 Collections.sort(imagePaths);
                 imageRVAdapter.notifyDataSetChanged();
                 break;
-            case "Descending":
+            case "Descending (New)":
                 // start action for option 2
                 Collections.reverse(imagePaths);
                 imageRVAdapter.notifyDataSetChanged();
+
                 break;
             default:
                 // do nothing
@@ -136,7 +137,7 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemSele
         if (isSDPresent) {
             final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};   // if the sd card is present we are creating a new list in which we are getting our images data with their ids.
             final String orderBy = MediaStore.Images.Media._ID;             // on below line we are creating a new string to order our images by string.
-            Cursor cursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, MediaStore.Images.Media.DATA + " like ? ", new String[] {"%D_Hide_r Pics%"}, orderBy);              // this method will stores all the images from the gallery in Cursor
+            Cursor cursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, MediaStore.Images.Media.DATA + " like ? ", new String[] {"%Hide_r Pics%"}, orderBy);              // this method will stores all the images from the gallery in Cursor
             int count = cursor.getCount();                      //below line is to get total number of images
             for (int i = 0; i < count; i++) {                           // on below line we are running a loop to add the image file path in our array list.
                 cursor.moveToPosition(i);                                               // on below line we are moving our cursor position

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="sorters">
-        <item>Ascending</item>
-        <item>Descending</item>
+        <item>Ascending (New)</item>
+        <item>Descending (Old)</item>
     </string-array>
 
 

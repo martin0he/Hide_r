@@ -95,16 +95,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         createFolder();   //initialise a root directory of all pictures to be saved for each phone, if it doesn't already exist
         DcreateFolder();
-        //try {
-           // FileED.encrypt(mHiderPicsFolder, EmHiderPicsFolder, password);
-       // } catch (Exception e) {
-           // e.printStackTrace();
-        //}
-        try {
-            TESTFileEncryptionDecryption.encryptFile(mHiderPicsFolder, EmHiderPicsFolder, password);
+
+        /*try {
+            FileEncryptionDecryption.encryptFile(mHiderPicsFolder, EmHiderPicsFolder, password);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        */
 
         textureView = (TextureView) findViewById(R.id.texture);
         assert textureView != null;
@@ -139,6 +136,13 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        /*try {
+            FileEncryptionDecryption.decryptFile(EmHiderPicsFolder, mHiderPicsFolder, password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        */
     }
 
     TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
@@ -445,13 +449,13 @@ public class MainActivity extends AppCompatActivity {
         File hiderFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);  //looks in root directory PICTURES(default for all android phones)
         mHiderPicsFolder = new File(hiderFolder, "Hide_r Pics");   //Named the folder, and how it will be seen as on the phone
         if(!mHiderPicsFolder.exists()){
-            mHiderPicsFolder.mkdirs();    //if the folder doesnt already exist, it creates it
+            mHiderPicsFolder.mkdirs();    //if the folder doesn't already exist, it creates it
         }
 
     }
 
     private File createPictureFileName() throws IOException{
-        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());   //metadata for each picture using basic date format
+        String timestamp = new SimpleDateFormat("ssmmHH_ddMMyyyy").format(new Date());   //metadata for each picture using basic date format
         String prepend = timestamp;
         File pictureFile = File.createTempFile(prepend, ".jpeg", mHiderPicsFolder);   //allocates each picture taken with its name, file type, and location(pics folder)
         mPicName = pictureFile.getAbsolutePath();
@@ -465,6 +469,8 @@ public class MainActivity extends AppCompatActivity {
             this.DmHiderPicsFolder.mkdirs();
         }
     }
+
+
 
     public static void saveToEncryptedFolder(byte[] bArr, String str, File file, String str2) throws Exception {
         SecretKeySpec secretKeySpec = new SecretKeySpec(str2.getBytes(), ALGORITHM);

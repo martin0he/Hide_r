@@ -3,6 +3,7 @@
     <string name="btext1">continue</string>
     <string name="btext2">back</string>
     <string name="gal">GALLERY</string>
+    <string name="spinnertitle">Sort</string>
 
 
 </resources>

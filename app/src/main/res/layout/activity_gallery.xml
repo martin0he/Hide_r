@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     android:gravity="center"
     android:background="@color/A1back"
@@ -30,39 +30,32 @@
         android:id="@+id/galtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_above="@id/idRVImages"
-
         android:layout_marginBottom="100dp"
         android:layout_centerHorizontal="true"
         android:background="@color/A1back"
         android:fontFamily="@font/bestfont"
         android:text="Gallery"
         android:textColor="@color/A1text"
-
         android:textSize="40sp"
         android:textStyle="bold" />
 
 
-    <Spinner
-
-        android:id="@+id/sortBtn"
-        android:layout_width="65dp"
-        android:layout_height="48dp"
-        android:layout_above="@id/idRVImages"
-        android:layout_marginLeft="327dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="24dp"
-
-        android:fontFamily="@font/bestfont"
-        android:text="sort"
-        android:textColor="@color/A1text"
-        android:textSize="15dp"
-        android:textStyle="bold"
-
-
-        />
     <!--recycler view for displaying the list of images-->
+
+
+    <Spinner
+        android:id="@+id/sortBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/idRVImages"
+        android:layout_marginStart="327dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="22dp"
+        android:spinnerMode="dropdown"
+        />
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idRVImages"
