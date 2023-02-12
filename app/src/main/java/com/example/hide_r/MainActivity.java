@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton switchCameraButton;
     private TextureView textureView;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
-    private File mHiderPicsFolder;   //name of directory holding all the pictures
+    public File mHiderPicsFolder;   //name of directory holding all the pictures
     private String mPicName;   //temporary name of each picture saved
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
@@ -100,6 +100,11 @@ public class MainActivity extends AppCompatActivity {
        // } catch (Exception e) {
            // e.printStackTrace();
         //}
+        try {
+            TESTFileEncryptionDecryption.encryptFile(mHiderPicsFolder, EmHiderPicsFolder, password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         textureView = (TextureView) findViewById(R.id.texture);
         assert textureView != null;
@@ -447,7 +452,7 @@ public class MainActivity extends AppCompatActivity {
 
     private File createPictureFileName() throws IOException{
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());   //metadata for each picture using basic date format
-        String prepend = "PICTURE" + timestamp + "_";
+        String prepend = timestamp;
         File pictureFile = File.createTempFile(prepend, ".jpeg", mHiderPicsFolder);   //allocates each picture taken with its name, file type, and location(pics folder)
         mPicName = pictureFile.getAbsolutePath();
         return pictureFile;   //returns the actual file to be saved in the takePicture method

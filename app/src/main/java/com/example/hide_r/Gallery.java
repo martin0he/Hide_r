@@ -35,6 +35,7 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemSele
     private Button returnButton;
     String[] sorters = {"Ascending", "Descending"};
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,7 +136,7 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemSele
         if (isSDPresent) {
             final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};   // if the sd card is present we are creating a new list in which we are getting our images data with their ids.
             final String orderBy = MediaStore.Images.Media._ID;             // on below line we are creating a new string to order our images by string.
-            Cursor cursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, MediaStore.Images.Media.DATA + " like ? ", new String[] {"%Hide_r Pics%"}, orderBy);              // this method will stores all the images from the gallery in Cursor
+            Cursor cursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, MediaStore.Images.Media.DATA + " like ? ", new String[] {"%D_Hide_r Pics%"}, orderBy);              // this method will stores all the images from the gallery in Cursor
             int count = cursor.getCount();                      //below line is to get total number of images
             for (int i = 0; i < count; i++) {                           // on below line we are running a loop to add the image file path in our array list.
                 cursor.moveToPosition(i);                                               // on below line we are moving our cursor position
