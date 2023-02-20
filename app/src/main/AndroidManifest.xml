@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".bioAUth"
+            android:name=".bioAuth"
             android:exported="false" />
         <activity
             android:name=".ImageDetailActivity"

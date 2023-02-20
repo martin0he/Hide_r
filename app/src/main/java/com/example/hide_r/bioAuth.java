@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.concurrent.Executor;
 
 
-public class bioAUth extends AppCompatActivity {
+public class bioAuth extends AppCompatActivity {
 
     private Executor executor;
     private BiometricPrompt biometricPrompt;
@@ -46,7 +46,7 @@ public class bioAUth extends AppCompatActivity {
 
 
         executor = ContextCompat.getMainExecutor(this);
-        biometricPrompt = new BiometricPrompt(bioAUth.this,
+        biometricPrompt = new BiometricPrompt(bioAuth.this,
                 executor, new BiometricPrompt.AuthenticationCallback() {
             @Override
             public void onAuthenticationError(int errorCode,

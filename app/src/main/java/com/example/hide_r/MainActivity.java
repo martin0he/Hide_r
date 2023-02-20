@@ -166,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
         public void onSurfaceTextureUpdated(SurfaceTexture surface) {
         }
     };
+
+
     private final CameraDevice.StateCallback stateCallback = new CameraDevice.StateCallback() {
         @Override
         public void onOpened(CameraDevice camera) {
@@ -441,7 +443,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void switchActivities() {   //method called to switch from MainActivity to Gallery Activity when the Gallery button is pressed
-        Intent switchActivityIntent = new Intent(this, bioAUth.class);
+        Intent switchActivityIntent = new Intent(this, bioAuth.class);
         startActivity(switchActivityIntent);
     }
 
