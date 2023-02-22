@@ -71,6 +71,7 @@ public class bioAuth extends AppCompatActivity {
                     e.printStackTrace();
                 }
                  */
+
                 switchActivities();
 
             }
@@ -90,9 +91,8 @@ public class bioAuth extends AppCompatActivity {
                 .setNegativeButtonText("Use account password")
                 .build();
 
-        // Prompt appears when user clicks "Log in".
-        // Consider integrating with the keystore to unlock cryptographic operations,
-        // if needed by your app.
+        // Prompt appears when user clicks "Authenticate".
+
         Button biometricLoginButton = findViewById(R.id.authButton);
         biometricLoginButton.setOnClickListener(view -> {
             biometricPrompt.authenticate(promptInfo);
@@ -103,17 +103,17 @@ public class bioAuth extends AppCompatActivity {
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goBack();   //when the return Button is pressed we switch back to the camera
+                goBack();   //when the return Button is pressed we switch back to the camera class
             }
         });
     }
 
-    private void switchActivities() {
+    private void switchActivities() {  //proceeds to gallery class
         Intent switchActivityIntent = new Intent(this, Gallery.class);
         startActivity(switchActivityIntent);
     }
 
-    private void goBack() {
+    private void goBack() {  //returns to the main class
         Intent switchActivityIntent = new Intent(this, MainActivity.class);
         startActivity(switchActivityIntent);
     }

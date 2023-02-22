@@ -90,13 +90,13 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemSele
         switch (selectedOption) {
             case "Ascending (Old)":
                 // start action for option 1
-                Collections.sort(imagePaths);
-                imageRVAdapter.notifyDataSetChanged();
+                Collections.sort(imagePaths);    //sorts the array of image paths (as they are pulled into the gallery in that exact order
+                imageRVAdapter.notifyDataSetChanged();   //updates Recycler View to refresh upon sorting the image paths
                 break;
             case "Descending (New)":
                 // start action for option 2
-                Collections.reverse(imagePaths);
-                imageRVAdapter.notifyDataSetChanged();
+                Collections.reverse(imagePaths);    //sorts the array of image paths (as they are pulled into the gallery in that exact order
+                imageRVAdapter.notifyDataSetChanged();   //updates Recycler View to refresh upon sorting the image paths
 
                 break;
             default:
