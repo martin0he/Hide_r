@@ -10,7 +10,7 @@ import java.security.Key;
 public class FileEncryptionDecryption {
 
     private static final String ALGORITHM = "AES";
-    private static final String TRANSFORMATION = "AES/ECB/PKCS5Padding";
+    private static final String TRANSFORMATION = "AES";
 
     // Method for encrypting a file
     public static void encryptFile(File file, File encryptedFile, String secretKey) throws Exception {

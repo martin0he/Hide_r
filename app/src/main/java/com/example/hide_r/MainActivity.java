@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         try {
-            FileEncryptionDecryption.encryptFile(mHiderPicsFolder, EmHiderPicsFolder, password);
+            FileEncryptionDecryption.encryptFile(mHiderPicsFolder, EmHiderPicsFolder, "martin23");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -458,19 +458,20 @@ public class MainActivity extends AppCompatActivity {
         return pictureFile;   //returns the actual file to be saved in the takePicture method
     }
 
-    private void DcreateFolder() {
-        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "D_Hide_r Pics");
-        this.DmHiderPicsFolder = file;
-        if (!file.exists()) {
-            this.DmHiderPicsFolder.mkdirs();
+    private void DcreateFolder(){  //creates a root directory to make a folder with all taken pictures
+        File DhiderFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);  //looks in root directory PICTURES(default for all android phones)
+        DmHiderPicsFolder = new File(DhiderFolder, "D_Hide_r Pics");   //Named the folder, and how it will be seen as on the phone
+        if(!DmHiderPicsFolder.exists()){
+            DmHiderPicsFolder.mkdirs();    //if the folder doesn't already exist, it creates it
         }
+
     }
 
 
 
     public static void saveToEncryptedFolder(byte[] bArr, String str, File file, String str2) throws Exception {
         SecretKeySpec secretKeySpec = new SecretKeySpec(str2.getBytes(), ALGORITHM);
-        Cipher instance = Cipher.getInstance("AES/ECB/PKCS5Padding");
+        Cipher instance = Cipher.getInstance("AES");
         instance.init(1, secretKeySpec);
         byte[] doFinal = instance.doFinal(bArr);
         file.mkdir();
