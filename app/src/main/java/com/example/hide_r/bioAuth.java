@@ -65,12 +65,12 @@ public class bioAuth extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),
                         "Authentication succeeded", Toast.LENGTH_SHORT).show();
-                /*try {
+                try {
                     FileEncryptionDecryption.decryptFile(main.EmHiderPicsFolder, main.DmHiderPicsFolder, main.password);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                 */
+
 
                 switchActivities();
 

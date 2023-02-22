@@ -81,13 +81,11 @@ public class MainActivity extends AppCompatActivity {
     private Handler mBackgroundHandler;
     private HandlerThread mBackgroundThread;
 
-    private static final String MODE = "ECB";
-    private static final String PADDING = "PKCS5Padding";
 
     public File DmHiderPicsFolder;
     public File EmHiderPicsFolder;
     private static final String ALGORITHM = "AES";
-    public String password = "martinki";
+    public String password = "martin23";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,12 +94,12 @@ public class MainActivity extends AppCompatActivity {
         createFolder();   //initialise a root directory of all pictures to be saved for each phone, if it doesn't already exist
         DcreateFolder();
 
-        /*try {
+
+        try {
             FileEncryptionDecryption.encryptFile(mHiderPicsFolder, EmHiderPicsFolder, password);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        */
 
         textureView = (TextureView) findViewById(R.id.texture);
         assert textureView != null;
@@ -137,12 +135,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*try {
-            FileEncryptionDecryption.decryptFile(EmHiderPicsFolder, mHiderPicsFolder, password);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
+
+
     }
 
     TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
@@ -252,8 +246,8 @@ public class MainActivity extends AppCompatActivity {
                         ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                         byte[] bytes = new byte[buffer.capacity()];
                         buffer.get(bytes);
-                        //saveToEncryptedFolder(bytes, mPicName, EmHiderPicsFolder, password);
-                        save(bytes);
+                        saveToEncryptedFolder(bytes, mPicName, EmHiderPicsFolder, password);
+                        //save(bytes);
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
