@@ -22,9 +22,9 @@ public class FileEncryptionDecryption {
         byte[] inputBytes = new byte[(int) file.length()];
         inputStream.read(inputBytes);
 
-        byte[] outputBytes = cipher.doFinal(inputBytes);
+        byte[] outputBytes = cipher.doFinal(inputBytes);   //parsing input file into encryption cipher
 
-        FileOutputStream outputStream = new FileOutputStream(encryptedFile);
+        FileOutputStream outputStream = new FileOutputStream(encryptedFile);   //serialisation of encrypted file
         outputStream.write(outputBytes);
 
         inputStream.close();
@@ -41,9 +41,9 @@ public class FileEncryptionDecryption {
         byte[] inputBytes = new byte[(int) encryptedFile.length()];
         inputStream.read(inputBytes);
 
-        byte[] outputBytes = cipher.doFinal(inputBytes);
+        byte[] outputBytes = cipher.doFinal(inputBytes); //parsing encryption file into decryption cipher
 
-        FileOutputStream outputStream = new FileOutputStream(decryptedFile);
+        FileOutputStream outputStream = new FileOutputStream(decryptedFile); //serialisation of decrypted file
         outputStream.write(outputBytes);
 
         inputStream.close();

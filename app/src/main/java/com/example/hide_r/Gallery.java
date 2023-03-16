@@ -132,20 +132,33 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemSele
     }
 
     private void getImagePath() {
-        boolean isSDPresent = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);            // in this method we are adding all our image paths in our arraylist which we have created. on below line we are checking if the device is having an sd card or not.
+        /*
+        in this method we are adding all our image paths in our arraylist which we have created.
+        on below line we are checking if the device has an sd card or not.
+        if the sd card is present we are creating a new list in which we are getting our images data with their ids.
+        on below line we are creating a new string to order our images by string.
+        this method will stores all the images from the gallery in Cursor.
+        below line is to get total number of images.
+        on below line we are running a loop to add the image file path in our array list.
+        on below line we are moving our cursor position.
+        on below line we are getting image file path.
+        after that we are getting the image file path as a String and adding that path to our array list.
+        after adding the data to our array list we are closing our cursor.
+         */
+        boolean isSDPresent = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
 
         if (isSDPresent) {
-            final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};   // if the sd card is present we are creating a new list in which we are getting our images data with their ids.
-            final String orderBy = MediaStore.Images.Media._ID;             // on below line we are creating a new string to order our images by string.
-            Cursor cursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, MediaStore.Images.Media.DATA + " like ? ", new String[] {"%D_Hide_r Pics%"}, orderBy);              // this method will stores all the images from the gallery in Cursor
-            int count = cursor.getCount();                      //below line is to get total number of images
-            for (int i = 0; i < count; i++) {                           // on below line we are running a loop to add the image file path in our array list.
-                cursor.moveToPosition(i);                                               // on below line we are moving our cursor position
-                int dataColumnIndex = cursor.getColumnIndex(MediaStore.Images.Media.DATA);      // on below line we are getting image file path
-                imagePaths.add(cursor.getString(dataColumnIndex));                      // after that we are getting the image file path and adding that path in our array list.
+            final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
+            final String orderBy = MediaStore.Images.Media._ID;
+            Cursor cursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, MediaStore.Images.Media.DATA + " like ? ", new String[] {"%Hide_r Pics%"}, orderBy);
+            int count = cursor.getCount();
+            for (int i = 0; i < count; i++) {
+                cursor.moveToPosition(i);
+                int dataColumnIndex = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
+                imagePaths.add(cursor.getString(dataColumnIndex));
             }
             imageRVAdapter.notifyDataSetChanged();
-            cursor.close();                                                 // after adding the data to our array list we are closing our cursor.
+            cursor.close();
         }
     }
 

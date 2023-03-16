@@ -61,19 +61,16 @@ public class bioAuth extends AppCompatActivity {
             public void onAuthenticationSucceeded(
                     @NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
-
-
                 Toast.makeText(getApplicationContext(),
                         "Authentication succeeded", Toast.LENGTH_SHORT).show();
-                try {
+                /*try {
                     FileEncryptionDecryption.decryptFile(main.EmHiderPicsFolder, main.DmHiderPicsFolder, "martin23");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-
-                switchActivities();
-
+                 */
+                switchActivities();//proceeds to the gallery activity
             }
 
             @Override
@@ -121,5 +118,3 @@ public class bioAuth extends AppCompatActivity {
 
 
 }
-
-

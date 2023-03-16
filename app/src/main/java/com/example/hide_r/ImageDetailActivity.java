@@ -1,15 +1,18 @@
 package com.example.hide_r;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.Date;
 
 public class ImageDetailActivity extends AppCompatActivity {
 
@@ -22,6 +25,7 @@ public class ImageDetailActivity extends AppCompatActivity {
     // on below line we are defining our scale factor.
     private float mScaleFactor = 1.0f;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +47,10 @@ public class ImageDetailActivity extends AppCompatActivity {
         if (imgFile.exists()) {
             Picasso.get().load(imgFile).placeholder(R.drawable.ic_launcher_background).into(imageView);
         }
+
+        int fileSize = Integer.parseInt(String.valueOf(imgFile.length()/1024));
+        TextView textView = (TextView) findViewById(R.id.textView2);
+        textView.setText("Name: " + imgFile.getName() + "\n" + "Path: " + imgFile.getAbsolutePath() + "\n" + "Date: " + new Date(imgFile.lastModified()) + "\n" + "Size: " + fileSize + " Bytes");
     }
 
     @Override

@@ -95,11 +95,12 @@ public class MainActivity extends AppCompatActivity {
         DcreateFolder();
 
 
-        try {
-            FileEncryptionDecryption.encryptFile(mHiderPicsFolder, EmHiderPicsFolder, "martin23");
+        /*try {
+            FileEncryptionDecryption.encryptFile(mHiderPicsFolder, EmHiderPicsFolder, password);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        */
 
         textureView = (TextureView) findViewById(R.id.texture);
         assert textureView != null;
@@ -122,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 switchCamera();     //when the CameraFlip Button is pressed the app switches to the front camera and vice versa.
-
             }
         });
 
@@ -246,8 +246,8 @@ public class MainActivity extends AppCompatActivity {
                         ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                         byte[] bytes = new byte[buffer.capacity()];
                         buffer.get(bytes);
-                        saveToEncryptedFolder(bytes, mPicName, EmHiderPicsFolder, password);
-                        //save(bytes);
+                        //saveToEncryptedFolder(bytes, mPicName, EmHiderPicsFolder, password);
+                        save(bytes);
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
@@ -379,7 +379,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
             if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
                 // close the app
-                Toast.makeText(MainActivity.this, "Sorry!!!, you can't use this app without granting permission", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Sorry!!! you can't use this app without granting permission", Toast.LENGTH_LONG).show();
                 finish();
             }
         }
