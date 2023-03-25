@@ -2,6 +2,7 @@ package com.example.hide_r;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
 
@@ -20,13 +22,15 @@ public class bioAuth extends AppCompatActivity {
     private Executor executor;
     private BiometricPrompt biometricPrompt;
     private BiometricPrompt.PromptInfo promptInfo;
-    MainActivity main = new MainActivity();
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bio_auth);
+
+
 
 
         ArrayList<View> viewsToFadeIn = new ArrayList<View>();
@@ -63,13 +67,17 @@ public class bioAuth extends AppCompatActivity {
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(getApplicationContext(),
                         "Authentication succeeded", Toast.LENGTH_SHORT).show();
+
                 /*try {
-                    FileEncryptionDecryption.decryptFile(main.EmHiderPicsFolder, main.DmHiderPicsFolder, "martin23");
+                    FileEncryptionDecryption.decryptFile(main.EmHiderPicsFolder, main.DmHiderPicsFolder);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
 
-                 */
+                */
+
+                MainActivity.dr.decryptDirectory(MainActivity.outputDirectory, MainActivity.decryptedDirectory);
+
                 switchActivities();//proceeds to the gallery activity
             }
 

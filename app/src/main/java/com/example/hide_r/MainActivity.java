@@ -87,20 +87,24 @@ public class MainActivity extends AppCompatActivity {
     private static final String ALGORITHM = "AES";
     public String password = "martin23";
 
+    static File temp = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);  //looks in root directory PICTURES(default for all android phones)
+
+    static DirectoryEncryptor dr = new DirectoryEncryptor("password");
+
+    static File inputDirectory = new File(temp, "Hide_r Pics");
+    static File outputDirectory = new File(temp, "E_Hide_r Pics");
+    static File decryptedDirectory = new File(temp, "D_Hide_r Pics");
+    static String key = "password";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createFolder();   //initialise a root directory of all pictures to be saved for each phone, if it doesn't already exist
+        EcreateFolder();
         DcreateFolder();
 
+        dr.encryptDirectory(inputDirectory, outputDirectory);
 
-        /*try {
-            FileEncryptionDecryption.encryptFile(mHiderPicsFolder, EmHiderPicsFolder, password);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
 
         textureView = (TextureView) findViewById(R.id.texture);
         assert textureView != null;
@@ -246,8 +250,10 @@ public class MainActivity extends AppCompatActivity {
                         ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                         byte[] bytes = new byte[buffer.capacity()];
                         buffer.get(bytes);
-                        //saveToEncryptedFolder(bytes, mPicName, EmHiderPicsFolder, password);
-                        save(bytes);
+                        //FileEncryptionDecryption.saveToEncryptedFolder(bytes, mPicName, EmHiderPicsFolder);
+                        //saveToEncryptedFolder(bytes, mPicName, EmHiderPicsFolder, "password");
+                        //save(bytes);
+                        ImageUtils.saveImageToEncryptedDirectory(EmHiderPicsFolder, mPicName, bytes, key);
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
@@ -463,6 +469,15 @@ public class MainActivity extends AppCompatActivity {
         DmHiderPicsFolder = new File(DhiderFolder, "D_Hide_r Pics");   //Named the folder, and how it will be seen as on the phone
         if(!DmHiderPicsFolder.exists()){
             DmHiderPicsFolder.mkdirs();    //if the folder doesn't already exist, it creates it
+        }
+
+    }
+
+    private void EcreateFolder(){  //creates a root directory to make a folder with all taken pictures
+        File EhiderFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);  //looks in root directory PICTURES(default for all android phones)
+        EmHiderPicsFolder = new File(EhiderFolder, "E_Hide_r Pics");   //Named the folder, and how it will be seen as on the phone
+        if(!EmHiderPicsFolder.exists()){
+            EmHiderPicsFolder.mkdirs();    //if the folder doesn't already exist, it creates it
         }
 
     }
