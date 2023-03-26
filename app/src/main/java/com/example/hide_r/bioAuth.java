@@ -24,13 +24,10 @@ public class bioAuth extends AppCompatActivity {
     private BiometricPrompt.PromptInfo promptInfo;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bio_auth);
-
-
 
 
         ArrayList<View> viewsToFadeIn = new ArrayList<View>();
@@ -40,13 +37,11 @@ public class bioAuth extends AppCompatActivity {
         {
             v.setAlpha(0); // make invisible to start
         }
-
         for (View v : viewsToFadeIn)
         {
             // 2 second fade in time
             v.animate().alpha(1.0f).setDuration(2400).start();
         }
-
 
 
         executor = ContextCompat.getMainExecutor(this);
@@ -68,16 +63,7 @@ public class bioAuth extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         "Authentication succeeded", Toast.LENGTH_SHORT).show();
 
-                /*try {
-                    FileEncryptionDecryption.decryptFile(main.EmHiderPicsFolder, main.DmHiderPicsFolder);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-
-                */
-
-                MainActivity.dr.decryptDirectory(MainActivity.outputDirectory, MainActivity.decryptedDirectory);
-
+                MainActivity.dr.decryptDirectory(MainActivity.inputDirectory, MainActivity.inputDirectory);
                 switchActivities();//proceeds to the gallery activity
             }
 
@@ -111,12 +97,17 @@ public class bioAuth extends AppCompatActivity {
                 goBack();   //when the return Button is pressed we switch back to the camera class
             }
         });
+
     }
+
+
 
     private void switchActivities() {  //proceeds to gallery class
         Intent switchActivityIntent = new Intent(this, Gallery.class);
         startActivity(switchActivityIntent);
     }
+
+
 
     private void goBack() {  //returns to the main class
         Intent switchActivityIntent = new Intent(this, MainActivity.class);
