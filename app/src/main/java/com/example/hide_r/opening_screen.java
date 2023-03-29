@@ -17,12 +17,12 @@ public class opening_screen extends AppCompatActivity {
 
 
     FadingTextView fadingTextView;
-    FadingTextView fadingtext2;
+
     FadingTextView move_on;
     String[] intro = {" ", "Welcome", "to", "hide_r"};   // first text to fade in
      // last text to fade in
     String[] move = {" ", "press here to continue"};  // the text to be tapped in order to move to next screen
-    Timer timer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

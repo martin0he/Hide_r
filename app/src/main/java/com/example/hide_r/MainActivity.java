@@ -99,9 +99,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createFolder();   //initialise a root directory of all pictures to be saved for each phone, if it doesn't already exist
-        //EcreateFolder();
-        //DcreateFolder();
-
         dr.encryptDirectory(inputDirectory, inputDirectory);
 
 
