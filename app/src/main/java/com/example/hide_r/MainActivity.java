@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private TextureView textureView;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     public File mHiderPicsFolder;   //name of directory holding all the pictures
+    public File DmHiderPicsFolder;
     private String mPicName;   //temporary name of each picture saved
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createFolder();   //initialise a root directory of all pictures to be saved for each phone, if it doesn't already exist
+        DcreateFolder();
         dr.encryptDirectory(inputDirectory, inputDirectory);
 
 
@@ -246,10 +248,8 @@ public class MainActivity extends AppCompatActivity {
                         ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                         byte[] bytes = new byte[buffer.capacity()];
                         buffer.get(bytes);
-                        //FileEncryptionDecryption.saveToEncryptedFolder(bytes, mPicName, EmHiderPicsFolder);
-                        //saveToEncryptedFolder(bytes, mPicName, EmHiderPicsFolder, "password");
-                        //save(bytes);
                         ImageUtils.saveImageToEncryptedDirectory(mHiderPicsFolder, mPicName, bytes, key);
+                        write.saveByteArrayToFile(bytes, DmHiderPicsFolder, mPicName);
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
@@ -460,15 +460,15 @@ public class MainActivity extends AppCompatActivity {
         return pictureFile;   //returns the actual file to be saved in the takePicture method
     }
 
-    /*private void DcreateFolder(){  //creates a root directory to make a folder with all taken pictures
-        File DhiderFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);  //looks in root directory PICTURES(default for all android phones)
+    private void DcreateFolder(){  //creates a root directory to make a folder with all taken pictures
+        File DhiderFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);  //looks in root directory PICTURES(default for all android phones)
         DmHiderPicsFolder = new File(DhiderFolder, "D_Hide_r Pics");   //Named the folder, and how it will be seen as on the phone
         if(!DmHiderPicsFolder.exists()){
             DmHiderPicsFolder.mkdirs();    //if the folder doesn't already exist, it creates it
         }
 
     }
-
+    /*
     private void EcreateFolder(){  //creates a root directory to make a folder with all taken pictures
         File EhiderFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);  //looks in root directory PICTURES(default for all android phones)
         EmHiderPicsFolder = new File(EhiderFolder, "E_Hide_r Pics");   //Named the folder, and how it will be seen as on the phone
