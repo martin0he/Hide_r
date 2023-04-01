@@ -38,8 +38,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
 
-        // on below line we are getting th file from the
-        // path which we have stored in our list.
+        // on below line we are getting th file from the path which we have stored in our list.
         File imgFile = new File(mHiderPicsFolder.get(position));
 
         // on below line we are checking if the file exists or not.
@@ -68,8 +67,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        // this method returns
-        // the size of recyclerview
+        // this method returns the size of recyclerview
         return mHiderPicsFolder.size();
     }
 

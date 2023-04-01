@@ -55,25 +55,21 @@ public class ImageDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
-        // inside on touch event method we are calling on
-        // touch event method and passing our motion event to it.
+        // inside on touch event method we are calling on touch event method and passing our motion event to it.
         scaleGestureDetector.onTouchEvent(motionEvent);
         return true;
     }
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
-        // on below line we are creating a class for our scale
-        // listener and extending it with gesture listener.
+        // on below line we are creating a class for our scale listener and extending it with gesture listener.
         @Override
         public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
 
-            // inside on scale method we are setting scale
-            // for our image in our image view.
+            // inside on scale method we are setting scale factor for our image in our image view.
             mScaleFactor *= scaleGestureDetector.getScaleFactor();
             mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 10.0f));
 
-            // on below line we are setting
-            // scale x and scale y to our image view.
+            // on below line we are setting scale x and scale y to our image view.
             imageView.setScaleX(mScaleFactor);
             imageView.setScaleY(mScaleFactor);
             return true;

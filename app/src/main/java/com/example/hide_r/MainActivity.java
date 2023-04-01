@@ -56,8 +56,12 @@ public class MainActivity extends AppCompatActivity {
     private TextureView textureView;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     public File mHiderPicsFolder;   //name of directory holding all the pictures
-    public File DmHiderPicsFolder;
+
     private String mPicName;   //temporary name of each picture saved
+
+    int width;
+    int height;
+
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
         ORIENTATIONS.append(Surface.ROTATION_90, 0);
@@ -82,26 +86,23 @@ public class MainActivity extends AppCompatActivity {
     private Handler mBackgroundHandler;
     private HandlerThread mBackgroundThread;
 
-
-    //public File DmHiderPicsFolder;
-    //public File EmHiderPicsFolder;
-    private static final String ALGORITHM = "AES";
-
-
     static File temp = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);  //looks in root directory PICTURES(default for all android phones)
 
-    static DirectoryEncryptor dr = new DirectoryEncryptor("password");
+    static DirectoryEncryptor dr = new DirectoryEncryptor("password"); //initialise the cipher
 
-    static File inputDirectory = new File(temp, "Hide_r Pics");
+    static File inputDirectory = new File(temp, "Hide_r Pics"); //path of the image directory
 
-    static String key = "password";
+    static String key = "password"; //key used for both encryption and decryption
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        createFolder();   //initialise a root directory of all pictures to be saved for each phone, if it doesn't already exist
-        DcreateFolder();
-        dr.encryptDirectory(inputDirectory, inputDirectory);
+
+        createFolder();   //initialises a root directory of all pictures to be saved for each phone, if it doesn't already exist
+
+
+
+        dr.encryptDirectory(inputDirectory, inputDirectory);  //encrypts the directory where all images are stored
 
 
         textureView = (TextureView) findViewById(R.id.texture);
@@ -131,8 +132,8 @@ public class MainActivity extends AppCompatActivity {
         View gogal = findViewById(R.id.gallery);
         gogal.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
-                switchActivities();             // when the Gallery Button is pressed the app moves to another activity(Gallery Activity)
-                // ... Respond to touch events
+                switchActivities();             // when the Gallery Button is pressed the app moves to bio-authentication screening
+
                 return true;
             }
         });
@@ -140,6 +141,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 
     TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
         @Override
@@ -184,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
             cameraDevice = null;
         }
     };
+
     final CameraCaptureSession.CaptureCallback captureCallbackListener = new CameraCaptureSession.CaptureCallback() {
         @Override
         public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
@@ -211,19 +215,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void takePicture() {          //function responsible for taking a picture with established parameters/resolution; and saving them to a previously created directory
+
         if (null == cameraDevice) {
             Log.e(TAG, "cameraDevice is null");
             return;
         }
         CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         try {
+
             CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraDevice.getId());
             Size[] jpegSizes = null;
             if (characteristics != null) {
                 jpegSizes = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP).getOutputSizes(ImageFormat.JPEG);
             }
-            int width = 1080;
-            int height = 1920;
+
             if (jpegSizes != null && 0 < jpegSizes.length) {
                 width = jpegSizes[0].getWidth();
                 height = jpegSizes[0].getHeight();
@@ -238,7 +243,11 @@ public class MainActivity extends AppCompatActivity {
             // Orientation
             int rotation = getWindowManager().getDefaultDisplay().getRotation();
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
+
             createPictureFileName();
+
+
+
             ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                 @Override
                 public void onImageAvailable(ImageReader reader) {
@@ -249,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
                         byte[] bytes = new byte[buffer.capacity()];
                         buffer.get(bytes);
                         ImageUtils.saveImageToEncryptedDirectory(mHiderPicsFolder, mPicName, bytes, key);
-                        write.saveByteArrayToFile(bytes, DmHiderPicsFolder, mPicName);
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
@@ -259,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                private void save(byte[] bytes) throws IOException {
+                private void save(byte[] bytes) throws IOException {//method used to test serialisation before implementing cryptography class
                     OutputStream output = null;
                     try {
                         output = new FileOutputStream(mPicName);
@@ -276,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
-                    Toast.makeText(MainActivity.this, "Saved:" + mPicName, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Image Saved", Toast.LENGTH_SHORT).show();
                     createCameraPreview();
                 }
             };
@@ -298,7 +307,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    /** Create a File for saving an image or video */
 
 
     protected void createCameraPreview() {
@@ -453,44 +461,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private File createPictureFileName() throws IOException{
-        String timestamp = new SimpleDateFormat("ssmmHH_ddMMyyyy").format(new Date());   //metadata for each picture using basic date format
-        String prepend = timestamp;
+        String prepend = new SimpleDateFormat("ssmmHH_ddMMyyyy").format(new Date());
         File pictureFile = File.createTempFile(prepend, ".jpeg", mHiderPicsFolder);   //allocates each picture taken with its name, file type, and location(pics folder)
         mPicName = pictureFile.getAbsolutePath();
         return pictureFile;   //returns the actual file to be saved in the takePicture method
-    }
-
-    private void DcreateFolder(){  //creates a root directory to make a folder with all taken pictures
-        File DhiderFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);  //looks in root directory PICTURES(default for all android phones)
-        DmHiderPicsFolder = new File(DhiderFolder, "D_Hide_r Pics");   //Named the folder, and how it will be seen as on the phone
-        if(!DmHiderPicsFolder.exists()){
-            DmHiderPicsFolder.mkdirs();    //if the folder doesn't already exist, it creates it
-        }
-
-    }
-    /*
-    private void EcreateFolder(){  //creates a root directory to make a folder with all taken pictures
-        File EhiderFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);  //looks in root directory PICTURES(default for all android phones)
-        EmHiderPicsFolder = new File(EhiderFolder, "E_Hide_r Pics");   //Named the folder, and how it will be seen as on the phone
-        if(!EmHiderPicsFolder.exists()){
-            EmHiderPicsFolder.mkdirs();    //if the folder doesn't already exist, it creates it
-        }
-
-    }
-
-     */
-
-
-
-    public static void saveToEncryptedFolder(byte[] bArr, String str, File file, String str2) throws Exception {
-        SecretKeySpec secretKeySpec = new SecretKeySpec(str2.getBytes(), ALGORITHM);
-        Cipher instance = Cipher.getInstance("AES");
-        instance.init(1, secretKeySpec);
-        byte[] doFinal = instance.doFinal(bArr);
-        file.mkdir();
-        FileOutputStream fileOutputStream = new FileOutputStream(new File(file, str));
-        fileOutputStream.write(doFinal);
-        fileOutputStream.close();
     }
 
 }

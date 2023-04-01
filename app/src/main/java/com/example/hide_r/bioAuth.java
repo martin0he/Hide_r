@@ -63,8 +63,8 @@ public class bioAuth extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         "Authentication succeeded", Toast.LENGTH_SHORT).show();
 
-                MainActivity.dr.decryptDirectory(MainActivity.inputDirectory, MainActivity.inputDirectory);
-                switchActivities();//proceeds to the gallery activity
+                MainActivity.dr.decryptDirectory(MainActivity.inputDirectory, MainActivity.inputDirectory);  //decrypts after successful authentication
+                switchActivities();  //proceeds to the gallery activity
             }
 
             @Override
@@ -94,7 +94,7 @@ public class bioAuth extends AppCompatActivity {
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goBack();   //when the return Button is pressed we switch back to the camera class
+                goBack();   //when the return Button is pressed we switch back to the camera feed class
             }
         });
 

@@ -27,8 +27,7 @@ import java.util.Collections;
 
 public class Gallery extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    // on below line we are creating variables for
-    // our array list, recycler view and adapter class.
+    // on below line we are creating variables for our array list, recycler view and adapter class.
     private static final int PERMISSION_REQUEST_CODE = 200;
     private ArrayList<String> imagePaths;
     private RecyclerView imagesRV;
@@ -63,9 +62,7 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemSele
         ArrayAdapter ad = new ArrayAdapter(this, android.R.layout.simple_spinner_item, sorters);
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sort.setAdapter(ad);
-        sort.setOnItemSelectedListener(this);
-
-
+        sort.setOnItemSelectedListener(this); //functionality for each drop-down menu option
         prepareRecyclerView();          // calling a method to prepare our recycler view.
     }
 
@@ -81,7 +78,7 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemSele
 
     }
 
-    private void switchActivities() {
+    private void switchActivities() {//switch to camera preview class
         Intent switchActivityIntent = new Intent(this, MainActivity.class);
         startActivity(switchActivityIntent);
     }
@@ -90,12 +87,12 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemSele
         switch (selectedOption) {
             case "Ascending (Old)":
                 // start action for option 1
-                Collections.sort(imagePaths);    //sorts the array of image paths (as they are pulled into the gallery in that exact order
+                Collections.sort(imagePaths);    //sorts the array of image paths (as they are pulled into the gallery in that exact order)
                 imageRVAdapter.notifyDataSetChanged();   //updates Recycler View to refresh upon sorting the image paths
                 break;
             case "Descending (New)":
                 // start action for option 2
-                Collections.reverse(imagePaths);    //sorts the array of image paths (as they are pulled into the gallery in that exact order
+                Collections.reverse(imagePaths);    //sorts the array of image paths in reverse order
                 imageRVAdapter.notifyDataSetChanged();   //updates Recycler View to refresh upon sorting the image paths
 
                 break;
@@ -121,7 +118,7 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemSele
     }
 
     private void requestPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);          //on below line we are requesting the rea external storage permissions.
+        ActivityCompat.requestPermissions(this, new String[]{READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);          //on the below line we are requesting the read external storage permissions.
     }
 
     private void prepareRecyclerView() {
@@ -138,7 +135,7 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemSele
         if the sd card is present we are creating a new list in which we are getting our images data with their ids.
         on below line we are creating a new string to order our images by string.
         this method will stores all the images from the gallery in Cursor.
-        below line is to get total number of images.
+        below line gets total number of images.
         on below line we are running a loop to add the image file path in our array list.
         on below line we are moving our cursor position.
         on below line we are getting image file path.
