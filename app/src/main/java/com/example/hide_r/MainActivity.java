@@ -257,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
                         ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                         byte[] bytes = new byte[buffer.capacity()];
                         buffer.get(bytes);
-                        ImageUtils.saveImageToEncryptedDirectory(mHiderPicsFolder, mPicName, bytes, key);
+                        ImageUtils.saveImageToEncryptedDirectory(mHiderPicsFolder, mPicName, bytes, key); //writes image data to encrypted directory
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -415,7 +415,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
     }
 
-    public void switchCamera() {   //method to seamlessly switch between cameras
+    public void switchCamera() {   //method to switch between cameras
         if (cameraId.equals(CAMERA_FRONT)) {
             cameraId = CAMERA_BACK;
             closeCamera();
